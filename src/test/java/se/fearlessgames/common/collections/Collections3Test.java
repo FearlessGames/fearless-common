@@ -38,7 +38,7 @@ public class Collections3Test {
 	@Test
 	public void sumIntegerList() throws Exception {
 		List<Integer> ints = Lists.newArrayList(2, 1, 3, 4);
-		int sum = Collections3.sum(ints, new Function<Integer, Integer>(){
+		long sum = Collections3.sum(ints, new Function<Integer, Integer>(){
 			@Override
 			public Integer apply(Integer input) {
 				return input;
@@ -50,7 +50,7 @@ public class Collections3Test {
 	@Test
 	public void sumObjects() throws Exception {
 		Set<Foo> foo = Sets.newHashSet(new Foo(2), new Foo(3), new Foo(5), new Foo(1));
-		int sum = Collections3.sum(foo, new Function<Foo, Integer>() {
+		long sum = Collections3.sum(foo, new Function<Foo, Integer>() {
 			@Override
 			public Integer apply(Foo input) {
 				return input.getValue();
