@@ -3,12 +3,13 @@ allprojects {
 	group 'se.fearless.fearless-common'
 	version '1.0-alfa'
 
-	sourceCompatibility = 1.6
-	targetCompatibility = 1.6
 
 
 	apply plugin: 'java'
 	apply plugin: 'maven'
+
+	sourceCompatibility = 1.6
+	targetCompatibility = 1.6
 
 	repositories {
 		jcenter()
