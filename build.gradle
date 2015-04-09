@@ -1,7 +1,7 @@
 subprojects {
 
 	group 'se.fearless.fearless-common'
-	version '1.0-alfa'
+	version '1.0-SNAPSHOT'
 
 
 
