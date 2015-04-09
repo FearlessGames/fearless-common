@@ -1,0 +1,17 @@
+project.ext.libDir = new File("lib")
+
+repositories {
+	flatDir name: 'projectLibs', dirs: project.ext.libDir
+}
+
+project.ext.kahluaVersion = '2.1.0'
+
+dependencies {
+	compile group: 'com.google.guava', name: 'guava', version: '14.0'
+	compile group: 'com.google.inject', name: 'guice', version: '3.0'
+	compile group: 'org.slf4j', name: 'slf4j-api', version: '1.7.7'
+	compile project(':locators')
+	compile group: 'se.krka', name: 'kahlua-core_5.1', version: project.ext.kahluaVersion
+	compile group: 'se.krka', name: 'kahlua-j2se_5.1', version: project.ext.kahluaVersion
+	compile group: 'se.krka', name: 'kahlua-interpreter_5.1', version: project.ext.kahluaVersion
+}

@@ -1,5 +1,6 @@
 package se.fearlessgames.common.lua;
 
+import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,8 +23,6 @@ import se.krka.kahlua.vm.Platform;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.List;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 public class LuaVm {
 	private final Logger logger = LoggerFactory.getLogger(getClass());
