@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+version = '1.0'
+
+
+dependencies {
+	compile project(':core')
+	compile 'se.mockachino:mockachino:0.6.1'
+	testCompile 'junit:junit:4.11'
+}

@@ -1,6 +1,7 @@
 package se.fearlessgames.common.mock;
 
-import se.mockachino.*;
+import se.mockachino.Mockachino;
+import se.mockachino.Settings;
 
 public class MockUtil {
 	public static <T> T deepMock(Class<T> clazz) {

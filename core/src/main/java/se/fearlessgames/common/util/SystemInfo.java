@@ -46,7 +46,7 @@ import java.util.regex.Pattern;
  * @since 1.0
  * @version $Id: SystemUtils.java 949223 2010-05-28 16:33:23Z ggregory $
  */
-public class SystemUtils {
+public class SystemInfo {
 
     private static final int JAVA_VERSION_TRIM_SIZE = 3;
 
@@ -1080,7 +1080,7 @@ public class SystemUtils {
      * @return the version, for example 1.31f for Java 1.3.1
      */
     private static float getJavaVersionAsFloat() {
-        return toVersionFloat(toJavaVersionIntArray(SystemUtils.JAVA_VERSION, JAVA_VERSION_TRIM_SIZE));
+        return toVersionFloat(toJavaVersionIntArray(SystemInfo.JAVA_VERSION, JAVA_VERSION_TRIM_SIZE));
     }
 
     /**
@@ -1104,7 +1104,7 @@ public class SystemUtils {
      * @return the version, for example 131 for Java 1.3.1
      */
     private static int getJavaVersionAsInt() {
-        return toVersionInt(toJavaVersionIntArray(SystemUtils.JAVA_VERSION, JAVA_VERSION_TRIM_SIZE));
+        return toVersionInt(toJavaVersionIntArray(SystemInfo.JAVA_VERSION, JAVA_VERSION_TRIM_SIZE));
     }
 
     /**
@@ -1536,7 +1536,7 @@ public class SystemUtils {
      * This constructor is public to permit tools that require a JavaBean instance to operate.
      * </p>
      */
-    public SystemUtils() {
+    public SystemInfo() {
         super();
     }
 

@@ -1,1 +1,2 @@
-include 'core', 'locators', 'lua', 'security'
+include 'core', 'locators', 'lua', 'security', 'test'
+
