@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+import static org.junit.Assert.*;
+
 public class FileStreamLocatorTest {
 	private static final String EXISTING_FILE = "existing.ext";
 	private static final String NON_EXISTING_FILE = "nonExisting.ext";
@@ -51,10 +53,10 @@ public class FileStreamLocatorTest {
 		tempFolder.newFile(EXISTING_FILE);
 		StreamLocator sl = new FileStreamLocator(tempFolder.getRoot());
 		Iterator<String> iterator = sl.listKeys();
-		Assert.assertTrue(iterator.hasNext());
+		assertTrue(iterator.hasNext());
 		String fileName = iterator.next();
-		Assert.assertEquals(EXISTING_FILE, fileName);
-		Assert.assertFalse(iterator.hasNext());
+		assertEquals(EXISTING_FILE, fileName);
+		assertFalse(iterator.hasNext());
 	}
 
 	@Test
@@ -69,17 +71,17 @@ public class FileStreamLocatorTest {
 		tempFolder.newFile(EXISTING_FILE);
 		StreamLocator sl = new FileStreamLocator(tempFolder.getRoot());
 		Iterator<String> iterator = sl.listKeys();
-		Assert.assertTrue(iterator.hasNext());
+		assertTrue(iterator.hasNext());
 		Collection<String> allKeys = new ArrayList<String>();
 		while (iterator.hasNext()) {
 			String s = iterator.next();
 			allKeys.add(s);
 		}
-		Assert.assertEquals(3, allKeys.size());
-		Assert.assertTrue(allKeys.contains("folder/hello.txt"));
-		Assert.assertTrue(allKeys.contains("folder/folder2/hello.txt"));
-		Assert.assertTrue(allKeys.contains(EXISTING_FILE));
-		Assert.assertFalse(allKeys.contains(NON_EXISTING_FILE));
+		assertEquals(3, allKeys.size());
+		assertTrue(allKeys.contains("folder/hello.txt"));
+		assertTrue(allKeys.contains("folder/folder2/hello.txt"));
+		assertTrue(allKeys.contains(EXISTING_FILE));
+		assertFalse(allKeys.contains(NON_EXISTING_FILE));
 
 
 	}
