@@ -1,10 +1,10 @@
 allprojects {
 
-	ext {
-		version = 1.0
-	}
+	group 'se.fearless.fearless-common'
+	version '1.0-alfa'
 
 	apply plugin: 'java'
+	apply plugin: 'maven'
 
 	repositories {
 		jcenter()
