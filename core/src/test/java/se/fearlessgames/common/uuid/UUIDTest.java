@@ -1,11 +1,12 @@
 package se.fearlessgames.common.uuid;
 
 import org.junit.Test;
-import se.fearlessgames.common.util.MockTimeProvider;
+import se.fearlessgames.common.time.MockTimeProvider;
 
 import java.security.SecureRandom;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 
 
 public class UUIDTest {
@@ -30,16 +31,16 @@ public class UUIDTest {
 		UUID firstUuid = uuidFactory.combUUID();
 		UUID secondUuid = uuidFactory.combUUID();
 
-		Assert.assertFalse(firstUuid.equals(secondUuid));
+		assertFalse(firstUuid.equals(secondUuid));
 		long combPart1 = getCombPart(firstUuid);
 		long combPart2 = getCombPart(secondUuid);
-		Assert.assertEquals(combPart1, combPart2);
+		assertEquals(combPart1, combPart2);
 
 		timeProvider.advanceTime(20);
 
 		UUID thirdUuid = uuidFactory.combUUID();
 		long combPart3 = getCombPart(thirdUuid);
-		Assert.assertFalse(combPart1 == combPart3);
+		assertFalse(combPart1 == combPart3);
 
 	}
 

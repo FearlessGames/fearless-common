@@ -1,8 +1,7 @@
 package se.fearlessgames.common.uuid;
 
-import com.google.inject.Inject;
-import se.fearlessgames.common.util.SystemTimeProvider;
-import se.fearlessgames.common.util.TimeProvider;
+import se.fearlessgames.common.time.SystemTimeProvider;
+import se.fearlessgames.common.time.TimeProvider;
 
 import java.util.Calendar;
 import java.util.Random;
@@ -13,7 +12,6 @@ public class UUIDFactoryImpl implements UUIDFactory {
 
 	public static final UUIDFactory INSTANCE = new UUIDFactoryImpl(new SystemTimeProvider(), new Random());
 
-	@Inject
 	public UUIDFactoryImpl(TimeProvider timeProvider, Random numberGenerator) {
 		this.timeProvider = timeProvider;
 		this.numberGenerator = numberGenerator;

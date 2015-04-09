@@ -1,11 +1,10 @@
 package se.fearlessgames.common.publisher;
 
-import com.google.common.collect.Sets;
-
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class SimplePublisher<T> implements Publisher<T> {
-	private final Set<Subscriber<T>> subscribers = Sets.newCopyOnWriteArraySet();
+	private final Set<Subscriber<T>> subscribers = new CopyOnWriteArraySet<Subscriber<T>>();
 
 	@Override
 	public void subscribe(Subscriber<T> subscriber) {

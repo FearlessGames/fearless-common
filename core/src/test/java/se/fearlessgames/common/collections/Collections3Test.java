@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 
+import static org.junit.Assert.*;
+
 
 public class Collections3Test {
 	@Test
@@ -17,7 +19,7 @@ public class Collections3Test {
 		Random random = new Random();
 		for(int i = 0; i < 1000; i++) {
 			String result = Collections3.getRandomElement(strings, random);
-			Assert.assertTrue(strings.contains(result));
+			assertTrue(strings.contains(result));
 		}
 	}
 
@@ -28,7 +30,7 @@ public class Collections3Test {
 		Random random = new Random();
 		for(int i = 0; i < 1000; i++) {
 			String result = Collections3.getRandomElement(strings, random);
-			Assert.assertNull(result);
+			assertNull(result);
 		}
 	}
 
@@ -41,7 +43,7 @@ public class Collections3Test {
 				return input;
 			}
 		});
-		Assert.assertEquals(10, sum);
+		assertEquals(10, sum);
 	}
 
 	@Test
@@ -53,7 +55,7 @@ public class Collections3Test {
 				return input.getValue();
 			}
 		});
-		Assert.assertEquals(11, sum);
+		assertEquals(11, sum);
 	}
 
 	private class Foo {
