@@ -9,7 +9,7 @@ public class ClasspathStreamLocatorTest {
 	@Test
 	public void findsInputStream() throws IOException {
 		StreamLocator sl = new ClasspathStreamLocator();
-		sl.getInputSupplier("/se/fearlessgames/common/io/ClasspathStreamLocatorTest.class").getInput();
+		sl.getInputSupplier("/se/fearless/common/io/ClasspathStreamLocatorTest.class").getInput();
 	}
 
 	@Test(expected=IOException.class)
@@ -21,6 +21,6 @@ public class ClasspathStreamLocatorTest {
 	@Test(expected=IOException.class)
 	public void throwsExceptionForGetOutput() throws IOException {
 		StreamLocator sl = new ClasspathStreamLocator();
-		sl.getOutputSupplier("/se/fearlessgames/common/io/ClasspathStreamLocatorTest.class").getOutput();
+		sl.getOutputSupplier("/se/fearless/common/io/ClasspathStreamLocatorTest.class").getOutput();
 	}
 }

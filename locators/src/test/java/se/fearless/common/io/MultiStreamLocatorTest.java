@@ -24,7 +24,7 @@ public class MultiStreamLocatorTest {
 	@Test
 	public void findsInputStreamFromClasspath() throws IOException {
 		StreamLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()), new ClasspathStreamLocator());
-		sl.getInputSupplier("/se/fearlessgames/common/io/MultiStreamLocator.class").getInput();
+		sl.getInputSupplier("/se/fearless/common/io/MultiStreamLocator.class").getInput();
 	}
 
 	@Test(expected=IOException.class)
