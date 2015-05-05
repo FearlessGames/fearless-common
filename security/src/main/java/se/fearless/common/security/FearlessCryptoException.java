@@ -1,10 +1,8 @@
 package se.fearless.common.security;
 
 
-import java.security.NoSuchAlgorithmException;
-
-public class FearlessCryptoException extends Exception {
-    public FearlessCryptoException() {
+public class FearlessCryptoException extends RuntimeException {
+	public FearlessCryptoException() {
     }
 
     public FearlessCryptoException(String message) {
