@@ -17,7 +17,7 @@ public class GsonSerializer implements JsonSerializer {
 	}
 
 	@Override
-	public <T> T fromJson(Class<T> klass, String data) {
+	public <T> T fromJson(String data, Class<T> klass) {
 		return gson.fromJson(data, klass);
 	}
 }
