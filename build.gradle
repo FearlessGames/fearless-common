@@ -1,3 +1,12 @@
+buildscript {
+	repositories {
+		jcenter()
+	}
+	dependencies {
+		classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
+	}
+}
+
 subprojects {
 
 	group 'se.fearless.fearless-common'
@@ -7,6 +16,7 @@ subprojects {
 
 	apply plugin: 'java'
 	apply plugin: 'maven'
+	apply plugin: 'com.github.ben-manes.versions'
 
 	sourceCompatibility = 1.6
 	targetCompatibility = 1.6
