@@ -86,7 +86,7 @@ public class LuaVm {
 	
 
 	public boolean runLua(final String sourceName) {
-		logger.info("Loading lua file {}.lua", sourceName);
+		logger.info("Loading lua file {}", sourceName);
 
 		LuaClosure closure = loadClosure(sourceName);
 
