@@ -1,0 +1,18 @@
+repositories {
+	maven {
+		url 'http://flexo.fearlessgames.se/artifactory/libs-local'
+		credentials {
+			username = "reader"
+			password = "f3ArlessGamesR0X!"
+		}
+	}
+}
+
+dependencies {
+	compile project(':core')
+	compile project(':math')
+	compile group: 'se.krka.kahlua', name: 'kahlua-j2se_5.1', version: '2.1.0'
+	compile 'com.google.guava:guava:18.0'
+	testCompile project(':test')
+	testCompile 'junit:junit:4.11'
+}

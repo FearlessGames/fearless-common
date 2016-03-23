@@ -1,1 +1,1 @@
-include 'core', 'json', 'locators', 'lua', 'security', 'test'
+include 'core', 'json', 'locators', 'lua', 'security', 'test', 'stats', 'math'
