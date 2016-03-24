@@ -4,12 +4,11 @@ import se.fearless.common.publisher.SimplePublisher;
 import se.fearless.common.publisher.Subscriber;
 
 public abstract class AbstractStat implements Stat {
-	private static final double EPSILON = 1e-6;
 
 	private final String name;
 	protected SimplePublisher<Stat> publisher = new SimplePublisher<Stat>();
 
-	AbstractStat(String name) {
+	protected AbstractStat(String name) {
 		this.name = name;
 	}
 
