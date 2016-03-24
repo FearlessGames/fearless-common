@@ -7,7 +7,7 @@ public class AuraStats extends DerivedStat implements MutableStat {
 	private final Multiset<ModStat> modStats = TreeMultiset.create();
 	private final MutableStat base;
 
-	protected AuraStats(MutableStat base) {
+	public AuraStats(MutableStat base) {
 		super("AuraStat:" + base.getName(), base);
 		this.base = base;
 		update(this);
