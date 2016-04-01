@@ -1,13 +1,11 @@
 package se.fearless.common.io;
 
 import com.google.common.collect.Iterators;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.OutputSupplier;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Iterator;
+import java.util.function.Supplier;
 
 public class ClasspathStreamLocator implements StreamLocator {
 
@@ -22,10 +20,10 @@ public class ClasspathStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public InputSupplier<? extends InputStream> getInputSupplier(final String key) {
-		return new InputSupplier<InputStream>() {
+	public Supplier<? extends InputStream> getInputStreamSupplier(final String key) {
+		return new Supplier<InputStream>() {
 			@Override
-			public InputStream getInput() throws IOException {
+			public InputStream get() {
 				String path = key;
 				if (path.contains("/") && !path.startsWith("/")) {
 					path = "/" + path;
@@ -33,7 +31,7 @@ public class ClasspathStreamLocator implements StreamLocator {
 
 				InputStream resource = clazz.getResourceAsStream(path);
 				if (resource == null) {
-					throw new IOException("Could not find resource " + path);
+					throw new RuntimeException("Could not find resource " + path);
 				}
 				return resource;
 			}
@@ -41,11 +39,11 @@ public class ClasspathStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public OutputSupplier<? extends OutputStream> getOutputSupplier(final String key) {
-		return new OutputSupplier<OutputStream>() {
+	public Supplier<? extends OutputStream> getOutputStreamSupplier(final String key) {
+		return new Supplier<OutputStream>() {
 			@Override
-			public OutputStream getOutput() throws IOException {
-				throw new IOException("Cannot write to a classpath resource");
+			public OutputStream get() {
+				throw new RuntimeException("Cannot write to a classpath resource");
 			}
 		};
 	}

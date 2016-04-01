@@ -4,23 +4,25 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static org.junit.Assert.assertNotNull;
+
 public class ClasspathStreamLocatorTest {
 
 	@Test
 	public void findsInputStream() throws IOException {
-		StreamLocator sl = new ClasspathStreamLocator();
-		sl.getInputSupplier("/se/fearless/common/io/ClasspathStreamLocatorTest.class").getInput();
+		InputStreamSupplierLocator sl = new ClasspathStreamLocator();
+		assertNotNull(sl.getInputStreamSupplier("/se/fearless/common/io/ClasspathStreamLocatorTest.class").get());
 	}
 
-	@Test(expected=IOException.class)
+	@Test(expected = RuntimeException.class)
 	public void throwsExceptionWhenInputNotFound() throws IOException {
-		StreamLocator sl = new ClasspathStreamLocator();
-		sl.getInputSupplier("notFound").getInput();
+		InputStreamSupplierLocator sl = new ClasspathStreamLocator();
+		sl.getInputStreamSupplier("notFound").get();
 	}
 
-	@Test(expected=IOException.class)
+	@Test(expected = RuntimeException.class)
 	public void throwsExceptionForGetOutput() throws IOException {
-		StreamLocator sl = new ClasspathStreamLocator();
-		sl.getOutputSupplier("/se/fearless/common/io/ClasspathStreamLocatorTest.class").getOutput();
+		OutputStreamSupplierLocator sl = new ClasspathStreamLocator();
+		sl.getOutputStreamSupplier("/se/fearless/common/io/ClasspathStreamLocatorTest.class").get();
 	}
 }

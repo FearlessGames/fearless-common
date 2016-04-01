@@ -1,14 +1,12 @@
 package se.fearless.common.io;
 
-import com.google.common.io.InputSupplier;
-import com.google.common.io.OutputSupplier;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Supplier;
 
 public class MultiStreamLocator implements StreamLocator {
 	private static final InputHandler INPUT_HANDLER = new InputHandler();
@@ -21,28 +19,28 @@ public class MultiStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public InputSupplier<? extends InputStream> getInputSupplier(final String key) {
-		return new InputSupplier<InputStream>() {
+	public Supplier<? extends InputStream> getInputStreamSupplier(final String key) {
+		return new Supplier<InputStream>() {
 			@Override
-			public InputStream getInput() throws IOException {
+			public InputStream get() {
 				return handle(key, INPUT_HANDLER);
 			}
 		};
 	}
 
 	@Override
-	public OutputSupplier<? extends OutputStream> getOutputSupplier(final String key) {
-		return new OutputSupplier<OutputStream>() {
+	public Supplier<? extends OutputStream> getOutputStreamSupplier(final String key) {
+		return new Supplier<OutputStream>() {
 			@Override
-			public OutputStream getOutput() throws IOException {
+			public OutputStream get() {
 				return handle(key, OUTPUT_HANDLER);
 			}
 		};
 	}
 
 
-	private <T> T handle(String key, Handler<T> handler) throws IOException {
-		IOException lastIOException = null;
+	private <T> T handle(String key, Handler<T> handler) {
+
 		RuntimeException lastRuntimeException = null;
 		for (StreamLocator delegate : delegates) {
 			try {
@@ -52,17 +50,12 @@ public class MultiStreamLocator implements StreamLocator {
 				}
 			} catch (RuntimeException e) {
 				lastRuntimeException = e;
-				lastIOException = null;
 			} catch (IOException e) {
-				lastIOException = e;
 				lastRuntimeException = null;
 			}
 		}
 		if (lastRuntimeException != null) {
 			throw lastRuntimeException;
-		}
-		if (lastIOException != null) {
-			throw lastIOException;
 		}
 		throw new RuntimeException("Resource not found: " + key);
 	}
@@ -70,7 +63,7 @@ public class MultiStreamLocator implements StreamLocator {
 	@Override
 	public Iterator<String> listKeys() {
 		List<String> keys = new ArrayList<String>();
-		for (StreamLocator delegate : delegates) {
+		for (InputStreamSupplierLocator delegate : delegates) {
 			Iterator<String> iter = delegate.listKeys();
 			while (iter.hasNext()) {
 				keys.add(iter.next());
@@ -86,16 +79,16 @@ public class MultiStreamLocator implements StreamLocator {
 	private static class InputHandler implements Handler<InputStream> {
 		@Override
 		public InputStream handle(String key, StreamLocator locator) throws IOException {
-			InputSupplier<? extends InputStream> supplier = locator.getInputSupplier(key);
-			return supplier.getInput();
+			Supplier<? extends InputStream> supplier = locator.getInputStreamSupplier(key);
+			return supplier.get();
 		}
 	}
 
 	private static class OutputHandler implements Handler<OutputStream> {
 		@Override
 		public OutputStream handle(String key, StreamLocator locator) throws IOException {
-			OutputSupplier<? extends OutputStream> outputSupplier = locator.getOutputSupplier(key);
-			return outputSupplier.getOutput();
+			Supplier<? extends OutputStream> outputSupplier = locator.getOutputStreamSupplier(key);
+			return outputSupplier.get();
 		}
 	}
 

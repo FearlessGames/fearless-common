@@ -1,13 +1,14 @@
 package se.fearless.common.io;
 
-import com.google.common.io.Files;
-import com.google.common.io.InputSupplier;
-import com.google.common.io.OutputSupplier;
+
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.Iterator;
+import java.util.function.Supplier;
 
 public class FileStreamLocator implements StreamLocator {
 	private final File root;
@@ -17,13 +18,27 @@ public class FileStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public InputSupplier<? extends InputStream> getInputSupplier(final String key) {
-		return Files.newInputStreamSupplier(new File(root, key));
+	public Supplier<? extends InputStream> getInputStreamSupplier(final String key) {
+		return () -> {
+			try {
+				return Files.newInputStream(new File(root, key).toPath());
+			} catch (IOException e) {
+				throw new RuntimeException("Failed to get input stream to " + key, e);
+			}
+		};
+
 	}
 
 	@Override
-	public OutputSupplier<? extends OutputStream> getOutputSupplier(final String key) {
-		return Files.newOutputStreamSupplier(new File(root, key));
+	public Supplier<? extends OutputStream> getOutputStreamSupplier(final String key) {
+		File file = new File(root, key);
+		return () -> {
+			try {
+				return Files.newOutputStream(file.toPath());
+			} catch (IOException e) {
+				throw new RuntimeException("Failed to get output stream to " + key, e);
+			}
+		};
 	}
 
 	@Override
