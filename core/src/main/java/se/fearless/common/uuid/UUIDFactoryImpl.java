@@ -51,7 +51,7 @@ public class UUIDFactoryImpl implements UUIDFactory {
 		byte[] uuidArray = randomUUID().getBytes();
 
 		Calendar baseDate = Calendar.getInstance();
-		baseDate.set(1900, 0, 1, 0, 0, 0);  //start the calendar at 1900-01-01 : 00:00:00
+		baseDate.set(1900, Calendar.JANUARY, 1, 0, 0, 0);  //start the calendar at 1900-01-01 : 00:00:00
 
 		Calendar now = Calendar.getInstance(); //current time
 		now.setTimeInMillis(timeProvider.now());

@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.concurrent.CopyOnWriteArraySet;
 
 public class SimplePublisher<T> implements Publisher<T> {
-	private final Set<Subscriber<T>> subscribers = new CopyOnWriteArraySet<Subscriber<T>>();
+	private final Set<Subscriber<T>> subscribers = new CopyOnWriteArraySet<>();
 
 	@Override
 	public void subscribe(Subscriber<T> subscriber) {

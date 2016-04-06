@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.function.Supplier;
 
 public interface InputStreamSupplierLocator {
-	Supplier<? extends InputStream> getInputStreamSupplier(String key);
+	Supplier<InputStream> getInputStreamSupplier(String key);
 
 	Iterator<String> listKeys();
 }

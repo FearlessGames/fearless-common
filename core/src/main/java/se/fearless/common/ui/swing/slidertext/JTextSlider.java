@@ -12,7 +12,7 @@ import java.util.Collection;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 public class JTextSlider extends JPanel {
-	private final Collection<ChangeListener> listeners = new CopyOnWriteArrayList<ChangeListener>();
+	private final Collection<ChangeListener> listeners = new CopyOnWriteArrayList<>();
 
 	private final JSlider slider;
 	private final JTextField textfield;
@@ -60,15 +60,12 @@ public class JTextSlider extends JPanel {
 		internalSetValue(startValue);
 		updateTextField();
 
-		slider.addChangeListener(new ChangeListener() {
-			@Override
-			public void stateChanged(ChangeEvent e) {
-				if (fromTextChange) {
-					return;
-				}
-				updateTextField();
-				notifyListeners();
+		slider.addChangeListener(e -> {
+			if (fromTextChange) {
+				return;
 			}
+			updateTextField();
+			notifyListeners();
 		});
 		textfield.getDocument().addDocumentListener(new DocumentListener() {
 			@Override

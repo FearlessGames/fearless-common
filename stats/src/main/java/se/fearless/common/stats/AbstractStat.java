@@ -6,7 +6,7 @@ import se.fearless.common.publisher.Subscriber;
 public abstract class AbstractStat implements Stat {
 
 	private final String name;
-	protected SimplePublisher<Stat> publisher = new SimplePublisher<Stat>();
+	protected SimplePublisher<Stat> publisher = new SimplePublisher<>();
 
 	protected AbstractStat(String name) {
 		this.name = name;

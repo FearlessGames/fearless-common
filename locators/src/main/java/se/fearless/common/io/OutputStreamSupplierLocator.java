@@ -4,5 +4,5 @@ import java.io.OutputStream;
 import java.util.function.Supplier;
 
 public interface OutputStreamSupplierLocator {
-	Supplier<? extends OutputStream> getOutputStreamSupplier(String key);
+	Supplier<OutputStream> getOutputStreamSupplier(String key);
 }

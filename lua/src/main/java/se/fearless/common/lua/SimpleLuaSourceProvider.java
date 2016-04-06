@@ -1,13 +1,14 @@
 package se.fearless.common.lua;
 
 import com.google.common.base.Charsets;
-import com.google.common.io.CharStreams;
 import com.google.inject.Inject;
+import se.fearless.common.io.InputReaderSupplier;
 import se.fearless.common.io.StreamLocator;
 import se.krka.kahlua.require.LuaSourceProvider;
 
-import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
+import java.util.function.Supplier;
 
 public class SimpleLuaSourceProvider implements LuaSourceProvider {
 	private final StreamLocator streamLocator;
@@ -19,11 +20,7 @@ public class SimpleLuaSourceProvider implements LuaSourceProvider {
 
 	@Override
 	public Reader getLuaSource(final String s) {
-		try {
-			return CharStreams.newReaderSupplier(streamLocator.getInputSupplier("/" + s + ".lua"), Charsets.UTF_8).getInput();
-		} catch (IOException e) {
-			//throw new RuntimeException(e);
-			return null;
-		}
+		Supplier<InputStream> inputStreamSupplier = streamLocator.getInputStreamSupplier("/" + s + ".lua");
+		return InputReaderSupplier.asInputReaderSupplier(inputStreamSupplier, Charsets.UTF_8).get();
 	}
 }

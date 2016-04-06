@@ -28,7 +28,7 @@ public class FileStreamLocatorTest {
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void failsFindingInputStream() throws IOException {
+	public void failsFindingInputStream() {
 		InputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
 		sl.getInputStreamSupplier(NON_EXISTING_FILE).get();
 	}
@@ -42,7 +42,7 @@ public class FileStreamLocatorTest {
 	}
 
 	@Test
-	public void createsOutputStream() throws IOException {
+	public void createsOutputStream() {
 		OutputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
 
 		assertNotNull(sl.getOutputStreamSupplier(NON_EXISTING_FILE).get());
@@ -72,7 +72,7 @@ public class FileStreamLocatorTest {
 		InputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
 		Iterator<String> iterator = sl.listKeys();
 		assertTrue(iterator.hasNext());
-		Collection<String> allKeys = new ArrayList<String>();
+		Collection<String> allKeys = new ArrayList<>();
 		while (iterator.hasNext()) {
 			String s = iterator.next();
 			allKeys.add(s);

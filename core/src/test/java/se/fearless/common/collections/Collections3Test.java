@@ -70,24 +70,14 @@ public class Collections3Test {
 	@Test
 	public void sumIntegerList() throws Exception {
 		List<Integer> ints = Lists.newArrayList(2, 1, 3, 4);
-		long sum = Collections3.sum(ints, new Collections3.Function<Integer, Integer>() {
-			@Override
-			public Integer apply(Integer input) {
-				return input;
-			}
-		});
+		long sum = Collections3.sum(ints, input -> input);
 		assertEquals(10, sum);
 	}
 
 	@Test
 	public void sumObjects() throws Exception {
 		Set<Foo> foo = Sets.newHashSet(new Foo(2), new Foo(3), new Foo(5), new Foo(1));
-		long sum = Collections3.sum(foo, new Collections3.Function<Foo, Integer>() {
-			@Override
-			public Integer apply(Foo input) {
-				return input.getValue();
-			}
-		});
+		long sum = Collections3.sum(foo, Foo::getValue);
 		assertEquals(11, sum);
 	}
 

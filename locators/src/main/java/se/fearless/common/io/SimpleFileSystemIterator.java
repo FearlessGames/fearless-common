@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SimpleFileSystemIterator {
 	public Iterator<String> iterator(File root) {
-		List<String> files = new ArrayList<String>();
+		List<String> files = new ArrayList<>();
 		if (!root.exists()) {
 			return files.iterator();
 		}

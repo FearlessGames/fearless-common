@@ -18,7 +18,7 @@ public class FileStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public Supplier<? extends InputStream> getInputStreamSupplier(final String key) {
+	public Supplier<InputStream> getInputStreamSupplier(final String key) {
 		return () -> {
 			try {
 				return Files.newInputStream(new File(root, key).toPath());
@@ -30,7 +30,7 @@ public class FileStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public Supplier<? extends OutputStream> getOutputStreamSupplier(final String key) {
+	public Supplier<OutputStream> getOutputStreamSupplier(final String key) {
 		File file = new File(root, key);
 		return () -> {
 			try {

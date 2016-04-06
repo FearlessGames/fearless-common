@@ -20,31 +20,25 @@ public class ClasspathStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public Supplier<? extends InputStream> getInputStreamSupplier(final String key) {
-		return new Supplier<InputStream>() {
-			@Override
-			public InputStream get() {
-				String path = key;
-				if (path.contains("/") && !path.startsWith("/")) {
-					path = "/" + path;
-				}
-
-				InputStream resource = clazz.getResourceAsStream(path);
-				if (resource == null) {
-					throw new RuntimeException("Could not find resource " + path);
-				}
-				return resource;
+	public Supplier<InputStream> getInputStreamSupplier(final String key) {
+		return () -> {
+			String path = key;
+			if (path.contains("/") && !path.startsWith("/")) {
+				path = "/" + path;
 			}
+
+			InputStream resource = clazz.getResourceAsStream(path);
+			if (resource == null) {
+				throw new RuntimeException("Could not find resource " + path);
+			}
+			return resource;
 		};
 	}
 
 	@Override
-	public Supplier<? extends OutputStream> getOutputStreamSupplier(final String key) {
-		return new Supplier<OutputStream>() {
-			@Override
-			public OutputStream get() {
-				throw new RuntimeException("Cannot write to a classpath resource");
-			}
+	public Supplier<OutputStream> getOutputStreamSupplier(final String key) {
+		return () -> {
+			throw new RuntimeException("Cannot write to a classpath resource");
 		};
 	}
 

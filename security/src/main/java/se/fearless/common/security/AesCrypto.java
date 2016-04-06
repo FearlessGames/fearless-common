@@ -38,15 +38,7 @@ public class AesCrypto implements FearCrypto {
             Cipher cipher = Cipher.getInstance(CIPHER);
             cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
             return cipher.doFinal(clearData);
-        } catch (IllegalBlockSizeException e) {
-            throw new FearlessCryptoException(e);
-        } catch (NoSuchPaddingException e) {
-            throw new FearlessCryptoException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new FearlessCryptoException(e);
-        } catch (BadPaddingException e) {
-            throw new FearlessCryptoException(e);
-        } catch (InvalidKeyException e) {
+        } catch (IllegalBlockSizeException | NoSuchPaddingException | BadPaddingException | NoSuchAlgorithmException | InvalidKeyException e) {
             throw new FearlessCryptoException(e);
         }
     }
@@ -58,15 +50,7 @@ public class AesCrypto implements FearCrypto {
             Cipher cipher = Cipher.getInstance(CIPHER);
             cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
             return cipher.doFinal(encryptedData);
-        } catch (IllegalBlockSizeException e) {
-            throw new FearlessCryptoException(e);
-        } catch (NoSuchPaddingException e) {
-            throw new FearlessCryptoException(e);
-        } catch (NoSuchAlgorithmException e) {
-            throw new FearlessCryptoException(e);
-        } catch (BadPaddingException e) {
-            throw new FearlessCryptoException(e);
-        } catch (InvalidKeyException e) {
+        } catch (IllegalBlockSizeException | NoSuchPaddingException | NoSuchAlgorithmException | InvalidKeyException | BadPaddingException e) {
             throw new FearlessCryptoException(e);
         }
     }

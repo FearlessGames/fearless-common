@@ -134,7 +134,7 @@ public class LinearTimeValueTest {
 
 
 	@Test
-	public void setValueBelowLowerBoundAndThenIncrease() throws Exception {
+	public void setValueBelowLowerBoundAndThenIncrease() {
 		LinearTimeValue value = new LinearTimeValue(200);
 		value.setCurrentRate(timeProvider.now(), 10);
 
@@ -146,7 +146,7 @@ public class LinearTimeValueTest {
 	}
 
 	@Test
-	public void setValueAboveUpperBoundAndThenCooldown() throws Exception {
+	public void setValueAboveUpperBoundAndThenCooldown() {
 		LinearTimeValue value = new LinearTimeValue(200);
 		value.setCurrentRate(timeProvider.now(), -10);
 

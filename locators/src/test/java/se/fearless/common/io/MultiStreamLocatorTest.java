@@ -24,13 +24,13 @@ public class MultiStreamLocatorTest {
 	}
 
 	@Test
-	public void findsInputStreamFromClasspath() throws IOException {
+	public void findsInputStreamFromClasspath() {
 		InputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()), new ClasspathStreamLocator());
 		assertNotNull(sl.getInputStreamSupplier("/se/fearless/common/io/MultiStreamLocator.class").get());
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void failsFindingInputStream() throws IOException {
+	public void failsFindingInputStream() {
 		InputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()));
 		sl.getInputStreamSupplier(NON_EXISTING_FILE).get();
 	}
@@ -44,7 +44,7 @@ public class MultiStreamLocatorTest {
 	}
 
 	@Test
-	public void createsOutputStream() throws IOException {
+	public void createsOutputStream() {
 		OutputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()));
 
 		assertNotNull(sl.getOutputStreamSupplier(NON_EXISTING_FILE).get());

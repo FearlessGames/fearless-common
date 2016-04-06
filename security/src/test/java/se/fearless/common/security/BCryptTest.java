@@ -29,9 +29,9 @@ public class BCryptTest {
 		private final Map<String, String> oneTimeSaltDB;
 
 		private Server() {
-			userHashDB = new HashMap<String, String>();
-			userSaltDB = new HashMap<String, String>();
-			oneTimeSaltDB = new HashMap<String, String>();
+			userHashDB = new HashMap<>();
+			userSaltDB = new HashMap<>();
+			oneTimeSaltDB = new HashMap<>();
 
 			addUser("Dem", "mittpass");
 		}

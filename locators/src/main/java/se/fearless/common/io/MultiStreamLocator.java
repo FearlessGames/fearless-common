@@ -1,6 +1,5 @@
 package se.fearless.common.io;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
@@ -19,23 +18,13 @@ public class MultiStreamLocator implements StreamLocator {
 	}
 
 	@Override
-	public Supplier<? extends InputStream> getInputStreamSupplier(final String key) {
-		return new Supplier<InputStream>() {
-			@Override
-			public InputStream get() {
-				return handle(key, INPUT_HANDLER);
-			}
-		};
+	public Supplier<InputStream> getInputStreamSupplier(final String key) {
+		return () -> handle(key, INPUT_HANDLER);
 	}
 
 	@Override
-	public Supplier<? extends OutputStream> getOutputStreamSupplier(final String key) {
-		return new Supplier<OutputStream>() {
-			@Override
-			public OutputStream get() {
-				return handle(key, OUTPUT_HANDLER);
-			}
-		};
+	public Supplier<OutputStream> getOutputStreamSupplier(final String key) {
+		return () -> handle(key, OUTPUT_HANDLER);
 	}
 
 
@@ -50,8 +39,6 @@ public class MultiStreamLocator implements StreamLocator {
 				}
 			} catch (RuntimeException e) {
 				lastRuntimeException = e;
-			} catch (IOException e) {
-				lastRuntimeException = null;
 			}
 		}
 		if (lastRuntimeException != null) {
@@ -62,7 +49,7 @@ public class MultiStreamLocator implements StreamLocator {
 
 	@Override
 	public Iterator<String> listKeys() {
-		List<String> keys = new ArrayList<String>();
+		List<String> keys = new ArrayList<>();
 		for (InputStreamSupplierLocator delegate : delegates) {
 			Iterator<String> iter = delegate.listKeys();
 			while (iter.hasNext()) {
@@ -72,13 +59,13 @@ public class MultiStreamLocator implements StreamLocator {
 		return keys.iterator();
 	}
 
-	private static interface Handler<T> {
-		T handle(String key, StreamLocator locator) throws IOException;
+	private interface Handler<T> {
+		T handle(String key, StreamLocator locator);
 	}
 
 	private static class InputHandler implements Handler<InputStream> {
 		@Override
-		public InputStream handle(String key, StreamLocator locator) throws IOException {
+		public InputStream handle(String key, StreamLocator locator) {
 			Supplier<? extends InputStream> supplier = locator.getInputStreamSupplier(key);
 			return supplier.get();
 		}
@@ -86,7 +73,7 @@ public class MultiStreamLocator implements StreamLocator {
 
 	private static class OutputHandler implements Handler<OutputStream> {
 		@Override
-		public OutputStream handle(String key, StreamLocator locator) throws IOException {
+		public OutputStream handle(String key, StreamLocator locator) {
 			Supplier<? extends OutputStream> outputSupplier = locator.getOutputStreamSupplier(key);
 			return outputSupplier.get();
 		}

@@ -13,7 +13,7 @@ public class PublisherImplTest {
 
 	@Test
 	public void subscribe() {
-		SimplePublisher<Integer> intPublisher = new SimplePublisher<Integer>();
+		SimplePublisher<Integer> intPublisher = new SimplePublisher<>();
 		Subscriber<Integer> sub1 = mock(INTEGER_SUBSCRIBER);
 		intPublisher.subscribe(sub1);
 
@@ -28,7 +28,7 @@ public class PublisherImplTest {
 
 	@Test
 	public void unsubscribe() {
-		SimplePublisher<Integer> intPublisher = new SimplePublisher<Integer>();
+		SimplePublisher<Integer> intPublisher = new SimplePublisher<>();
 		Subscriber<Integer> sub1 = mock(INTEGER_SUBSCRIBER);
 		Subscriber<Integer> sub2 = mock(INTEGER_SUBSCRIBER);
 		intPublisher.subscribe(sub1);

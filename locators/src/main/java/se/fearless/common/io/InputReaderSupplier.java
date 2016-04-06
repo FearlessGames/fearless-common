@@ -7,9 +7,7 @@ import java.util.function.Supplier;
 
 public class InputReaderSupplier {
 
-	public static Supplier<InputStreamReader> asInputReaderSupplier(InputStream inputStream, Charset charset) {
-		return () -> {
-			return new InputStreamReader(inputStream, charset);
-		};
+	public static Supplier<InputStreamReader> asInputReaderSupplier(Supplier<InputStream> inputStream, Charset charset) {
+		return () -> new InputStreamReader(inputStream.get(), charset);
 	}
 }

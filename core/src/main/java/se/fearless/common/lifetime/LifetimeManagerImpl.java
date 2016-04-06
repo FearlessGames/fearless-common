@@ -12,7 +12,7 @@ public class LifetimeManagerImpl implements LifetimeManager {
 	private State state = State.NOT_STARTED;
 
 	public LifetimeManagerImpl() {
-		this.listeners = new ArrayList<LifetimeListener>();
+		this.listeners = new ArrayList<>();
 	}
 
 	@Override

@@ -10,7 +10,7 @@ public class FileSystemIterator implements Iterator<String> {
 	private Stack<Iterator<File>> stack;
 
 	public FileSystemIterator(File root) {
-		stack = new Stack<Iterator<File>>();
+		stack = new Stack<>();
 		stack.push(Iterators.forArray(root.listFiles()));
 	}
 
