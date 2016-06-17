@@ -1,7 +1,7 @@
 
 dependencies {
 	compile 'org.slf4j:slf4j-api:1.7.7'
-	testCompile 'junit:junit:4.11'
-	testCompile 'com.google.guava:guava:14.0'
-	testCompile 'se.mockachino:mockachino:0.6.1'
+	testCompile 'junit:junit:4.12'
+	testCompile 'com.google.guava:guava:18.0'
+	testCompile 'se.mockachino:mockachino:0.7.1'
 }

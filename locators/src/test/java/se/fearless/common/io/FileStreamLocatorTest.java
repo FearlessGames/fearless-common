@@ -64,7 +64,7 @@ public class FileStreamLocatorTest {
 		File folder = tempFolder.newFolder("folder");
 		File oneLevelDown = new File(folder, "hello.txt");
 		oneLevelDown.createNewFile();
-		File subfolder = tempFolder.newFolder("folder/folder2");
+		File subfolder = tempFolder.newFolder("folder", "folder2");
 		File twoLevelsDown = new File(subfolder, "hello.txt");
 		twoLevelsDown.createNewFile();
 

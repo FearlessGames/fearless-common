@@ -1,7 +1,7 @@
 
 dependencies {
 	compile 'org.mindrot:jbcrypt:0.3m'
-	compile 'com.google.guava:guava:14.0'
-	testCompile 'junit:junit:4.11'
+	compile 'com.google.guava:guava:18.0'
+	testCompile 'junit:junit:4.12'
 	testCompile project(':core')
 }

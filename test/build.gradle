@@ -1,6 +1,6 @@
 
 dependencies {
 	compile project(':core')
-	compile 'se.mockachino:mockachino:0.6.1'
-	testCompile 'junit:junit:4.11'
+	compile 'se.mockachino:mockachino:0.7.1'
+	testCompile 'junit:junit:4.12'
 }

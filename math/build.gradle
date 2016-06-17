@@ -1,5 +1,5 @@
 dependencies {
 	compile project(':core')
 	testCompile project(':test')
-	testCompile 'junit:junit:4.11'
+	testCompile 'junit:junit:4.12'
 }

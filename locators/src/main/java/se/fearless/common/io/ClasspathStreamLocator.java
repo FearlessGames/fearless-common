@@ -1,5 +1,6 @@
 package se.fearless.common.io;
 
+import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterators;
 
 import java.io.InputStream;
@@ -44,7 +45,7 @@ public class ClasspathStreamLocator implements StreamLocator {
 
 	@Override
 	public Iterator<String> listKeys() {
-		return Iterators.emptyIterator();
+		return ImmutableSet.<String>of().iterator();
 	}
 
 }
