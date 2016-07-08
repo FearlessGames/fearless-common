@@ -20,19 +20,19 @@ public class MultiStreamLocatorTest {
 		tempFolder.newFile(EXISTING_FILE);
 		ByteSourceLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
 
-		assertNotNull(sl.getByteSource(EXISTING_FILE).get());
+		assertNotNull(sl.getByteSource(EXISTING_FILE).openStream());
 	}
 
 	@Test
-	public void findsInputStreamFromClasspath() {
+	public void findsInputStreamFromClasspath() throws IOException {
 		ByteSourceLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()), new ClasspathIOLocator());
-		assertNotNull(sl.getByteSource("/se/fearless/common/io/MultiStreamLocator.class").get());
+		assertNotNull(sl.getByteSource("/se/fearless/common/io/MultiStreamLocator.class").openStream());
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void failsFindingInputStream() {
+	public void failsFindingInputStream() throws IOException {
 		ByteSourceLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
-		sl.getByteSource(NON_EXISTING_FILE).get();
+		sl.getByteSource(NON_EXISTING_FILE).openStream();
 	}
 
 	@Test
@@ -40,13 +40,13 @@ public class MultiStreamLocatorTest {
 		tempFolder.newFile(EXISTING_FILE);
 		ByteSinkLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
 
-		assertNotNull(sl.getByteSink(EXISTING_FILE).get());
+		assertNotNull(sl.getByteSink(EXISTING_FILE).openStream());
 	}
 
 	@Test
-	public void createsOutputStream() {
+	public void createsOutputStream() throws IOException {
 		ByteSinkLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
 
-		assertNotNull(sl.getByteSink(NON_EXISTING_FILE).get());
+		assertNotNull(sl.getByteSink(NON_EXISTING_FILE).openStream());
 	}
 }
