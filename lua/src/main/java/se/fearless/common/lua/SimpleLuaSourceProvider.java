@@ -20,7 +20,7 @@ public class SimpleLuaSourceProvider implements LuaSourceProvider {
 
 	@Override
 	public Reader getLuaSource(final String s) {
-		Supplier<InputStream> inputStreamSupplier = streamLocator.getInputStreamSupplier("/" + s + ".lua");
+		Supplier<InputStream> inputStreamSupplier = streamLocator.getInputStreamSupplier(s + ".lua");
 		return InputReaderSupplier.asInputReaderSupplier(inputStreamSupplier, StandardCharsets.UTF_8).get();
 	}
 }
