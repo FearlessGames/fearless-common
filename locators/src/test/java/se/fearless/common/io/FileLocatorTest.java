@@ -12,7 +12,7 @@ import java.util.Iterator;
 
 import static org.junit.Assert.*;
 
-public class FileStreamLocatorTest {
+public class FileLocatorTest {
 	private static final String EXISTING_FILE = "existing.ext";
 	private static final String NON_EXISTING_FILE = "nonExisting.ext";
 
@@ -22,36 +22,36 @@ public class FileStreamLocatorTest {
 	@Test
 	public void findsInputStream() throws IOException {
 		tempFolder.newFile(EXISTING_FILE);
-		InputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
+		ByteSourceLocator sl = new FileLocator(tempFolder.getRoot());
 
-		assertNotNull(sl.getInputStreamSupplier(EXISTING_FILE).get());
+		assertNotNull(sl.getByteSource(EXISTING_FILE).openStream());
 	}
 
 	@Test(expected = RuntimeException.class)
-	public void failsFindingInputStream() {
-		InputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
-		sl.getInputStreamSupplier(NON_EXISTING_FILE).get();
+	public void failsFindingInputStream() throws IOException {
+		ByteSourceLocator sl = new FileLocator(tempFolder.getRoot());
+		sl.getByteSource(NON_EXISTING_FILE).openStream();
 	}
 
 	@Test
 	public void findsExistingOutputStream() throws IOException {
 		tempFolder.newFile(EXISTING_FILE);
-		OutputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
+		ByteSinkLocator sl = new FileLocator(tempFolder.getRoot());
 
-		assertNotNull(sl.getOutputStreamSupplier(EXISTING_FILE).get());
+		assertNotNull(sl.getByteSink(EXISTING_FILE).openStream());
 	}
 
 	@Test
-	public void createsOutputStream() {
-		OutputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
+	public void createsOutputStream() throws IOException {
+		ByteSinkLocator sl = new FileLocator(tempFolder.getRoot());
 
-		assertNotNull(sl.getOutputStreamSupplier(NON_EXISTING_FILE).get());
+		assertNotNull(sl.getByteSink(NON_EXISTING_FILE).openStream());
 	}
 
 	@Test
 	public void testListKeys() throws Exception {
 		tempFolder.newFile(EXISTING_FILE);
-		InputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
+		ByteSourceLocator sl = new FileLocator(tempFolder.getRoot());
 		Iterator<String> iterator = sl.listKeys();
 		assertTrue(iterator.hasNext());
 		String fileName = iterator.next();
@@ -69,7 +69,7 @@ public class FileStreamLocatorTest {
 		twoLevelsDown.createNewFile();
 
 		tempFolder.newFile(EXISTING_FILE);
-		InputStreamSupplierLocator sl = new FileStreamLocator(tempFolder.getRoot());
+		ByteSourceLocator sl = new FileLocator(tempFolder.getRoot());
 		Iterator<String> iterator = sl.listKeys();
 		assertTrue(iterator.hasNext());
 		Collection<String> allKeys = new ArrayList<>();

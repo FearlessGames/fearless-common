@@ -18,35 +18,35 @@ public class MultiStreamLocatorTest {
 	@Test
 	public void findsInputStreamFromFilesystem() throws IOException {
 		tempFolder.newFile(EXISTING_FILE);
-		InputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()));
+		ByteSourceLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
 
-		assertNotNull(sl.getInputStreamSupplier(EXISTING_FILE).get());
+		assertNotNull(sl.getByteSource(EXISTING_FILE).get());
 	}
 
 	@Test
 	public void findsInputStreamFromClasspath() {
-		InputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()), new ClasspathStreamLocator());
-		assertNotNull(sl.getInputStreamSupplier("/se/fearless/common/io/MultiStreamLocator.class").get());
+		ByteSourceLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()), new ClasspathIOLocator());
+		assertNotNull(sl.getByteSource("/se/fearless/common/io/MultiStreamLocator.class").get());
 	}
 
 	@Test(expected = RuntimeException.class)
 	public void failsFindingInputStream() {
-		InputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()));
-		sl.getInputStreamSupplier(NON_EXISTING_FILE).get();
+		ByteSourceLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
+		sl.getByteSource(NON_EXISTING_FILE).get();
 	}
 
 	@Test
 	public void findsExistingOutputStream() throws IOException {
 		tempFolder.newFile(EXISTING_FILE);
-		OutputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()));
+		ByteSinkLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
 
-		assertNotNull(sl.getOutputStreamSupplier(EXISTING_FILE).get());
+		assertNotNull(sl.getByteSink(EXISTING_FILE).get());
 	}
 
 	@Test
 	public void createsOutputStream() {
-		OutputStreamSupplierLocator sl = new MultiStreamLocator(new FileStreamLocator(tempFolder.getRoot()));
+		ByteSinkLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
 
-		assertNotNull(sl.getOutputStreamSupplier(NON_EXISTING_FILE).get());
+		assertNotNull(sl.getByteSink(NON_EXISTING_FILE).get());
 	}
 }
