@@ -29,7 +29,7 @@ public class MultiStreamLocatorTest {
 		assertNotNull(sl.getByteSource("/se/fearless/common/io/MultiStreamLocator.class").openStream());
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = IOException.class)
 	public void failsFindingInputStream() throws IOException {
 		ByteSourceLocator sl = new MultiStreamLocator(new FileLocator(tempFolder.getRoot()));
 		sl.getByteSource(NON_EXISTING_FILE).openStream();

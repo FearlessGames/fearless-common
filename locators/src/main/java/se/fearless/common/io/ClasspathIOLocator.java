@@ -34,7 +34,7 @@ public class ClasspathIOLocator implements IOLocator {
 
 				InputStream resource = clazz.getResourceAsStream(path);
 				if (resource == null) {
-					throw new RuntimeException("Could not find resource " + path);
+					throw new IOException("Could not find resource " + path);
 				}
 				return resource;
 			}

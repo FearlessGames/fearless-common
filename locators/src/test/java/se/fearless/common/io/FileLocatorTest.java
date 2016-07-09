@@ -27,7 +27,7 @@ public class FileLocatorTest {
 		assertNotNull(sl.getByteSource(EXISTING_FILE).openStream());
 	}
 
-	@Test(expected = RuntimeException.class)
+	@Test(expected = IOException.class)
 	public void failsFindingInputStream() throws IOException {
 		ByteSourceLocator sl = new FileLocator(tempFolder.getRoot());
 		sl.getByteSource(NON_EXISTING_FILE).openStream();
